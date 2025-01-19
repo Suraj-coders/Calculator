@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #111010;
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator {
+            background: rgb(28, 26, 26);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+        }
+
+        .display {
+            width: 95%;
+            height: 50px;
+            background: #eaeaea;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: right;
+            padding: 0 10px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .button {
+            height: 50px;
+            background: #007BFF;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .button:hover {
+            background: #0056b3;
+        }
+
+        .button:active {
+            background: #004085;
+        }
+
+     .clear {
+            background: #FF4D4D;
+            height: 50px;
+            
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .clear:hover {
+            background: #cc0000;
+        }
+
+        .equals {
+            background: #28a745;
+            grid-column: span 2;
+            height: 50px;
+            
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .equals:hover {
+            background: #1e7e34;
+        }
+
+        .backspace {
+            background: #FFA500;
+            height: 50px;
+            
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+     .backspace:hover {
+            background: #cc8400;
+        }
+
+        .button.percent {
+            background: #6f42c1;
+            height: 50px;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .button.percent:hover {
+            background: #5a339c;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" readonly>
+        <div class="buttons">
+            <button class="button">7</button>
+            <button class="button">8</button>
+            <button class="button">9</button>
+            <button class="backspace" onclick="backspace()">&#x2190;</button>
+            <button class="button">4</button>
+            <button class="button">5</button>
+            <button class="button">6</button>
+            <button class="button">/</button>
+            <button class="button">1</button>
+            <button class="button">2</button>
+            <button class="button">3</button>
+            <button class="button">*</button>
+            <button class="button">0</button>
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="button percent">%</button>
+            <button class="button">+</button>
+            <button class="button">-</button>
+            <button class="button">.</button>
+            <button class="equals" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+    <Script>
+        let btn=document.querySelectorAll(".button")
+        for(let i=0; i<btn.length; i++){
+            
+            
+            btn[i].addEventListener("click",function(){
+                let value= btn[i].innerHTML
+                console.log(value);
+                
+                let display = document.querySelector("#display");
+                
+                
+                if (value === '0' && display.value === '') {
+                    return;
+                }
+                
+                display.value += value;
+            })
+        }
+        function clearDisplay() {
+    document.getElementById('display').value = '';
+}
+
+function backspace() {
+    let display = document.getElementById('display');
+    display.value = display.value.slice(0, -1);
+}
+function calculateResult() {
+    let display = document.getElementById('display');
+    try {
+        display.value = eval(display.value);
+    } catch (e) {
+        display.value = 'Error';
+    }
+}
+    </Script>
+</body>
+</html>
